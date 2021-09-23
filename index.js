@@ -8,7 +8,12 @@ const authRoutes = require("./routes/authRoutes");
 require('./models/User'); // Needs to be loaded before passport which uses User
 require('./services/passport'); // Just to make sure the passport.js file is loaded
 
-mongoose.connect(keys.mongoURI);
+mongoose.connect(keys.mongoURI, {useNewUrlParser: true})
+    .then(() => {
+        console.log("MONGODB connected")
+    }).catch(() => {
+        console.log("MONGODB Connection unsuccessful")
+    });
 
 const app = express();
 
